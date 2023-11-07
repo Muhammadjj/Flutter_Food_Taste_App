@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "247339037069",
+    "project_id": "food-taste-app-5a86f",
+    "storage_bucket": "food-taste-app-5a86f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247339037069:android:cd4d7b7d6791b992218dc4",
+        "android_client_info": {
+          "package_name": "com.example.food_taste_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "247339037069-ku8hjbrp2rt2p819p9ct6ehtabnnnbss.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.food_taste_app",
+            "certificate_hash": "aa4c97d30b24735a4f5f0cf3c514141aabd2dcbf"
+          }
+        },
+        {
+          "client_id": "247339037069-g6a9130gs2rdggrc4q54l02h8raih73j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZPuzIeRvK-p-8nlWMtT6YOuj-dBRQp9A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "247339037069-g6a9130gs2rdggrc4q54l02h8raih73j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
