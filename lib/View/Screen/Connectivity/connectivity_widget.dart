@@ -26,8 +26,8 @@ class ConnectivityData extends StatelessWidget {
           ),
           CupertinoButton(
               color: textColor,
-              child: const Text("Check Connectivity"),
-              onPressed: onPressed)
+              onPressed: onPressed,
+              child: const Text("Check Connectivity"))
         ],
       ),
     );

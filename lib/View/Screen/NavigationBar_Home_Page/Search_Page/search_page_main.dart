@@ -96,9 +96,13 @@ class _SearchBarPageState extends ConsumerState<SearchBarPage> {
                                 side: BorderSide(
                                     color: Colors.white.withOpacity(0.2))),
                             child: ListTile(
-                              leading: Image(
-                                  image: NetworkImage(
-                                      searchResults[index]["imageUrl"])),
+                              // ! Hero Tag
+                              leading: Hero(
+                                tag: searchResults[index]["imageUrl"],
+                                child: Image(
+                                    image: NetworkImage(
+                                        searchResults[index]["imageUrl"])),
+                              ),
                               title: productNameText(
                                   name: searchResults[index]['name']),
                               subtitle: productPriceText(

@@ -83,7 +83,7 @@ class _ProfilePageState extends ConsumerState<ProfilePage> {
           ProfileImagePart(
             backgroundImage: userInfoImage != null
                 ? NetworkImage(userInfoImage.toString())
-                : const NetworkImage(back),
+                : const NetworkImage(networkImages),
             text: "${firstName.toString()}\t$lastName",
           ),
 

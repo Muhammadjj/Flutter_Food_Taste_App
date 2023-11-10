@@ -13,15 +13,13 @@ class CustomProductHomePage extends ConsumerStatefulWidget {
       required this.image,
       required this.name,
       required this.price,
-      this.favoriteOnPress,
-      this.favoriteIcon = const Icon(Icons.favorite),
+      required this.productImageHeroTag,
       this.onTap});
 
   final String image;
   final String name;
   final num? price;
-  final void Function()? favoriteOnPress;
-  final Widget favoriteIcon;
+  final String productImageHeroTag;
   final GestureTapCallback? onTap;
 
   @override
@@ -57,27 +55,22 @@ class _CustomProductHomePageState extends ConsumerState<CustomProductHomePage> {
           child: Column(
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // ! Favorite Icon Section
-              Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                      color: Colors.red,
-                      splashColor: Colors.white,
-                      onPressed: widget.favoriteOnPress,
-                      icon: widget.favoriteIcon)),
               // image Section
               Expanded(
                 flex: 4,
                 child: CustomSizedBox(
                   widthRatio: width * 0.2,
-                  child: Image(
-                    image: NetworkImage(
-                      widget.image,
+                  child: Hero(
+                    tag: widget.productImageHeroTag,
+                    child: Image(
+                      image: NetworkImage(
+                        widget.image,
+                      ),
+                      fit: BoxFit.fill,
+                      errorBuilder: (context, error, stackTrace) {
+                        return const Center(child: Text("No Image"));
+                      },
                     ),
-                    fit: BoxFit.fill,
-                    errorBuilder: (context, error, stackTrace) {
-                      return const Center(child: Text("data"));
-                    },
                   ),
                 ),
               ),

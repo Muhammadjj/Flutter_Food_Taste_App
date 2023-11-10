@@ -82,7 +82,8 @@ class BlurTextField extends StatelessWidget {
       this.textInputAction,
       required this.controller,
       this.onChanged,
-      this.onFieldSubmitted});
+      this.onFieldSubmitted,
+      this.style = const TextStyle(color: Colors.white)});
 
   final double? height;
   final double? width;
@@ -97,6 +98,7 @@ class BlurTextField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
+  final TextStyle? style;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -132,6 +134,7 @@ class BlurTextField extends StatelessWidget {
             obscureText: obscureText,
             obscuringCharacter: obscuringCharacter,
             keyboardType: keyboardType,
+            style: style,
             textInputAction: textInputAction,
             cursorColor: const Color.fromARGB(255, 255, 64, 71),
           ),

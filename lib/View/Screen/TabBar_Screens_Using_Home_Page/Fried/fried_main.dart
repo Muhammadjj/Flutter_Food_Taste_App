@@ -78,6 +78,9 @@ class _FriedPageState extends ConsumerState<FriedPage> {
                   var names = product.name.toString();
                   var prices = product.price;
                   return CustomProductHomePage(
+                    // Hero Tag
+                    productImageHeroTag: images,
+                    // Firebase Data
                     image: images,
                     name: names,
                     price: prices,

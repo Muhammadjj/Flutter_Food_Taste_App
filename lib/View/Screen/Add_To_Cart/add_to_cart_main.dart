@@ -3,14 +3,21 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:food_taste_app/Controller/DataBase/favorite_db_helper_database.dart';
+import 'package:food_taste_app/Controller/Routes/routes_method.dart';
 import 'package:food_taste_app/Models/add_to_cart_model.dart';
+import 'package:food_taste_app/Models/favorite_button_model_class.dart';
 import 'package:food_taste_app/View/Screen/Add_To_Cart/add_to_cart_widget.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/colors.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/utility.dart';
 import 'package:food_taste_app/View/Widgets/shining_button.dart';
 
+import '../../../Controller/Services/get_firebase_add_to_cart_method.dart';
+
 class AddToCartScreen extends ConsumerStatefulWidget {
-  const AddToCartScreen({super.key});
+  const AddToCartScreen({
+    super.key,
+  });
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -18,32 +25,15 @@ class AddToCartScreen extends ConsumerStatefulWidget {
 }
 
 class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
+  // Favorite Database Classes
+  FavoriteDbHelperClass dbHelperClass = FavoriteDbHelperClass();
   // Firebase Services
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
   AddCartModelClass cartModelClass = AddCartModelClass();
 
-  List<AddCartModelClass> addToCartList = [];
-
-// ** GetData Details Screen and Show AddToCart Screen .
-  Future<List<AddCartModelClass>> getAddToCartData() async {
-    List<AddCartModelClass> newList = [];
-    var getData = await firestore
-        .collection("UserInfo")
-        .doc(user!.uid)
-        .collection("YourCart")
-        .get();
-
-    for (var element in getData.docs) {
-      cartModelClass = AddCartModelClass.fromMap(element.data());
-      newList.add(cartModelClass);
-      debugPrint(">>>>>>>>>>>>>>>>>>>>>>>>>....  $newList");
-    }
-    addToCartList = newList;
-    debugPrint("....................${addToCartList.length}");
-
-    return addToCartList;
-  }
+  // ! Fetch Add To Cart Data Class Objects.
+  AddToCartFetchDataMethod fetchDataMethod = AddToCartFetchDataMethod();
 
 // Press delete icon and delete list of item one by one .
   Future<void> deleteItem({required String itemId}) {
@@ -55,11 +45,27 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
         .delete();
   }
 
+  // Favorite icon button
+  favoriteInsertData() async {
+    try {
+      dbHelperClass.databaseInsert(
+          modelClass: FavoriteIconModelClass(
+        favoriteID: user!.uid,
+        favoriteImageUrl: cartModelClass.cartImageUrl,
+        favoriteName: cartModelClass.cartName,
+        favoritePrice: cartModelClass.cartPrice,
+      ));
+      showCommonSnackBar(context, text: "Successfully favorite");
+    } catch (e) {
+      showCommonSnackBar(context, text: "Error ::::::;;${e.toString()} ");
+    }
+  }
+
   @override
   void initState() {
     // Todo: implement initState
     super.initState();
-    getAddToCartData();
+    fetchDataMethod.getAddToCartData();
   }
 
   @override
@@ -69,7 +75,7 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
     return Scaffold(
       backgroundColor: allScreenColor,
       body: FutureBuilder(
-        future: getAddToCartData(),
+        future: fetchDataMethod.getAddToCartData(),
         builder: (context, AsyncSnapshot<List<AddCartModelClass>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -107,6 +113,10 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
                                     itemId: snapshot.data![index].cartUid
                                         .toString());
                                 setState(() {});
+                              },
+                              // ! Favorite Icon Button .
+                              favoriteIconOnPress: () {
+                                favoriteInsertData();
                               },
                             );
                           }),
@@ -153,7 +163,19 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
                                       .withOpacity(0.7),
                               child:
                                   buttonTextSizeAndFont(text: "FINAL PROCESS"),
-                              onTap: () {},
+                              onTap: () {
+                                if (snapshot.data!.isNotEmpty) {
+                                  Navigator.pushNamed(
+                                      context, RoutesClassName.checkOutPage,
+                                      arguments: AddCartModelClass(
+                                          cartImageUrl: cartModelClass
+                                              .cartImageUrl
+                                              .toString(),
+                                          cartName: cartModelClass.cartName
+                                              .toString(),
+                                          cartPrice: cartModelClass.cartPrice));
+                                }
+                              },
                             )
                           ],
                         ),

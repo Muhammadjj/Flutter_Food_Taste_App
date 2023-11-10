@@ -96,281 +96,274 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
           // ! background Image Section
           const BackgroundAuthImage(),
           // ! SignUp Page Section .
-          ListView(
-            scrollDirection: Axis.vertical,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-                // BACK ICON
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Icon(
-                    CupertinoIcons.arrow_left,
-                    color: iconColor,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Form(
-                  key: globalKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      // Image From Gallery .
-                      image != null
-                          ? SignUpGalleryImage(
-                              image: Image.file(
-                                image!.absolute,
-                                fit: BoxFit.cover,
+          SafeArea(
+            child: ListView(
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Form(
+                    key: globalKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Image From Gallery .
+                        image != null
+                            ? SignUpGalleryImage(
+                                image: Image.file(
+                                  image!.absolute,
+                                  fit: BoxFit.cover,
+                                ),
+                                onTap: () => getImagePicker(),
+                              )
+                            : SignUpGalleryImage(
+                                image: Image.asset(
+                                  backgroundImage,
+                                  fit: BoxFit.cover,
+                                ),
+                                onTap: () => getImagePicker(),
                               ),
-                              onTap: () => getImagePicker(),
-                            )
-                          : SignUpGalleryImage(
-                              image: Image.asset(
-                                backgroundImage,
-                                fit: BoxFit.cover,
-                              ),
-                              onTap: () => getImagePicker(),
-                            ),
-                      //  TextForm Field Section .
-                      SizedBox(
-                        height: height * 0.01,
-                      ),
+                        //  TextForm Field Section .
+                        SizedBox(
+                          height: height * 0.04,
+                        ),
 
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          // First Name
-                          Expanded(
-                              child: BlurTextField(
-                            height: height * 0.095,
-                            width: width * 0.95,
-                            prefixIcon: const Icon(
-                              CupertinoIcons.person_alt_circle,
-                              color: Colors.white,
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            // First Name
+                            Expanded(
+                                child: BlurTextField(
+                              height: height * 0.095,
+                              width: width * 0.95,
+                              prefixIcon: const Icon(
+                                CupertinoIcons.person_alt_circle,
+                                color: Colors.white,
+                              ),
+                              controller: firstNameController,
+                              hintText: "First Name",
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.done,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Your First Name.";
+                                }
+                                final validator = Validator(
+                                  validators: [
+                                    const MaxLengthValidator(length: 1000)
+                                  ],
+                                );
+                                return validator.validate(
+                                  label: 'Required',
+                                  value: value,
+                                );
+                              },
+                            )),
+                            SizedBox(
+                              width: width * 0.03,
                             ),
-                            controller: firstNameController,
-                            hintText: "First Name",
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.done,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Your First Name.";
-                              }
-                              final validator = Validator(
-                                validators: [
-                                  const MaxLengthValidator(length: 1000)
-                                ],
-                              );
-                              return validator.validate(
-                                label: 'Required',
-                                value: value,
-                              );
-                            },
-                          )),
-                          SizedBox(
-                            width: width * 0.03,
+                            // Last Name
+                            Expanded(
+                                child: BlurTextField(
+                              height: height * 0.095,
+                              width: width * 0.95,
+                              controller: lastNameController,
+                              hintText: "Last Name",
+                              prefixIcon: const Icon(
+                                CupertinoIcons.person_alt_circle,
+                                color: Colors.white,
+                              ),
+                              keyboardType: TextInputType.name,
+                              textInputAction: TextInputAction.done,
+                              validator: (value) {
+                                if (value.isEmpty) {
+                                  return "Your Last Name.";
+                                }
+                                final validator = Validator(
+                                  validators: [
+                                    const MaxLengthValidator(length: 100)
+                                  ],
+                                );
+                                return validator.validate(
+                                  label: 'Required',
+                                  value: value,
+                                );
+                              },
+                            )),
+                          ],
+                        ),
+
+                        //  Email .
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
+                        BlurTextField(
+                          height: height * 0.095,
+                          width: width * 0.95,
+                          hintText: "Email",
+                          controller: emailController,
+                          prefixIcon: const Icon(
+                            Icons.email_outlined,
+                            color: iconColor,
                           ),
-                          // Last Name
-                          Expanded(
-                              child: BlurTextField(
-                            height: height * 0.095,
-                            width: width * 0.95,
-                            controller: lastNameController,
-                            hintText: "Last Name",
-                            prefixIcon: const Icon(
-                              CupertinoIcons.person_alt_circle,
-                              color: Colors.white,
-                            ),
-                            keyboardType: TextInputType.name,
-                            textInputAction: TextInputAction.done,
-                            validator: (value) {
-                              if (value.isEmpty) {
-                                return "Your Last Name.";
+                          keyboardType: TextInputType.emailAddress,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return "Please Enter Your Email.";
+                            }
+                            final validator = Validator(
+                              validators: [
+                                const EmailValidator(),
+                                const MaxLengthValidator(length: 30)
+                              ],
+                            );
+                            return validator.validate(
+                              label: 'Required',
+                              value: value,
+                            );
+                          },
+                        ),
+                        // Password
+                        SizedBox(
+                          height: height * 0.03,
+                        ),
+                        BlurTextField(
+                          height: height * 0.095,
+                          width: width * 0.95,
+                          controller: passwordController,
+                          hintText: "Password",
+                          keyboardType: TextInputType.visiblePassword,
+                          obscureText: passwordIcon,
+                          obscuringCharacter: "*",
+                          prefixIcon: const Icon(
+                            Icons.password_outlined,
+                            color: Colors.white,
+                          ),
+                          // password Icon Change with help of River Pod .
+                          suffixIcon: InkWell(
+                            onTap: () {
+                              if (passwordIcon == false) {
+                                ref
+                                    .read(checkPassword.notifier)
+                                    .update((state) => true);
+                              } else {
+                                ref
+                                    .read(checkPassword.notifier)
+                                    .update((state) => false);
                               }
-                              final validator = Validator(
-                                validators: [
-                                  const MaxLengthValidator(length: 100)
-                                ],
-                              );
-                              return validator.validate(
-                                label: 'Required',
-                                value: value,
-                              );
                             },
-                          )),
-                        ],
-                      ),
-
-                      //  Email .
-                      SizedBox(
-                        height: height * 0.03,
-                      ),
-                      BlurTextField(
-                        height: height * 0.095,
-                        width: width * 0.95,
-                        hintText: "Email",
-                        controller: emailController,
-                        prefixIcon: const Icon(
-                          Icons.email_outlined,
-                          color: iconColor,
+                            child: passwordIcon
+                                ? const Icon(
+                                    CupertinoIcons.lock,
+                                    color: Colors.white,
+                                  )
+                                : const Icon(
+                                    CupertinoIcons.lock_fill,
+                                    color: Colors.white,
+                                  ),
+                          ),
+                          textInputAction: TextInputAction.done,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Please Enter Your Password.";
+                            }
+                            final validator = Validator(
+                              validators: [
+                                const MaxLengthValidator(length: 10)
+                              ],
+                            );
+                            return validator.validate(
+                              label: 'Required',
+                              value: value,
+                            );
+                          },
                         ),
-                        keyboardType: TextInputType.emailAddress,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Please Enter Your Email.";
-                          }
-                          final validator = Validator(
-                            validators: [
-                              const EmailValidator(),
-                              const MaxLengthValidator(length: 30)
-                            ],
-                          );
-                          return validator.validate(
-                            label: 'Required',
-                            value: value,
-                          );
-                        },
-                      ),
-                      // Password
-                      SizedBox(
-                        height: height * 0.03,
-                      ),
-                      BlurTextField(
-                        height: height * 0.095,
-                        width: width * 0.95,
-                        controller: passwordController,
-                        hintText: "Password",
-                        keyboardType: TextInputType.visiblePassword,
-                        obscureText: passwordIcon,
-                        obscuringCharacter: "*",
-                        prefixIcon: const Icon(
-                          Icons.password_outlined,
-                          color: Colors.white,
+                        SizedBox(
+                          height: height * 0.03,
                         ),
-                        // password Icon Change with help of River Pod .
-                        suffixIcon: InkWell(
+                        BlurTextField(
+                          height: height * 0.095,
+                          width: width * 0.95,
+                          controller: phoneController,
+                          hintText: "Phone",
+                          keyboardType: TextInputType.phone,
+                          prefixIcon: const Icon(
+                            CupertinoIcons.phone_circle_fill,
+                            color: Colors.white,
+                          ),
+                          textInputAction: TextInputAction.done,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return "Please Enter Your Phone No.";
+                            }
+                            final validator = Validator(
+                              validators: [
+                                const PhoneNumberValidator(),
+                                const MaxLengthValidator(length: 13)
+                              ],
+                            );
+                            return validator.validate(
+                              label: 'Required',
+                              value: value,
+                            );
+                          },
+                        ),
+                        SizedBox(
+                          height: height * 0.06,
+                        ),
+                        FoodTasteShineButton(
+                          loading: loading,
+                          color: const Color.fromARGB(255, 255, 71, 76),
+                          height: height * 0.08,
+                          width: width * 0.8,
+                          firstLinearGradientColors:
+                              const Color.fromARGB(255, 255, 64, 71),
+                          secondLinearGradientColors:
+                              const Color.fromARGB(143, 253, 86, 86)
+                                  .withOpacity(0.7),
+                          child: buttonTextSizeAndFont(text: "SIGN UP"),
                           onTap: () {
-                            if (passwordIcon == false) {
-                              ref
-                                  .read(checkPassword.notifier)
-                                  .update((state) => true);
-                            } else {
-                              ref
-                                  .read(checkPassword.notifier)
-                                  .update((state) => false);
+                            setState(() {
+                              loading = false;
+                            });
+                            if (globalKey.currentState!.validate()) {
+                              createEndUser(emailController.text,
+                                  passwordController.text);
                             }
                           },
-                          child: passwordIcon
-                              ? const Icon(
-                                  CupertinoIcons.lock,
-                                  color: Colors.white,
-                                )
-                              : const Icon(
-                                  CupertinoIcons.lock_fill,
-                                  color: Colors.white,
-                                ),
                         ),
-                        textInputAction: TextInputAction.done,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return "Please Enter Your Password.";
-                          }
-                          final validator = Validator(
-                            validators: [const MaxLengthValidator(length: 10)],
-                          );
-                          return validator.validate(
-                            label: 'Required',
-                            value: value,
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: height * 0.03,
-                      ),
-                      BlurTextField(
-                        height: height * 0.095,
-                        width: width * 0.95,
-                        controller: phoneController,
-                        hintText: "Phone",
-                        keyboardType: TextInputType.phone,
-                        prefixIcon: const Icon(
-                          CupertinoIcons.phone_circle_fill,
-                          color: Colors.white,
+                        SizedBox(
+                          height: height * 0.02,
                         ),
-                        textInputAction: TextInputAction.done,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return "Please Enter Your Phone No.";
-                          }
-                          final validator = Validator(
-                            validators: [
-                              const PhoneNumberValidator(),
-                              const MaxLengthValidator(length: 13)
-                            ],
-                          );
-                          return validator.validate(
-                            label: 'Required',
-                            value: value,
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: height * 0.06,
-                      ),
-                      FoodTasteShineButton(
-                        loading: loading,
-                        color: const Color.fromARGB(255, 255, 71, 76),
-                        height: height * 0.08,
-                        width: width * 0.8,
-                        firstLinearGradientColors:
-                            const Color.fromARGB(255, 255, 64, 71),
-                        secondLinearGradientColors:
-                            const Color.fromARGB(143, 253, 86, 86)
-                                .withOpacity(0.7),
-                        child: buttonTextSizeAndFont(text: "SIGN UP"),
-                        onTap: () {
-                          setState(() {
-                            loading = false;
-                          });
-                          if (globalKey.currentState!.validate()) {
-                            createEndUser(
-                                emailController.text, passwordController.text);
-                          }
-                        },
-                      ),
-                      SizedBox(
-                        height: height * 0.02,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          const AutoSizeText("Already Have An Account",
-                              style: TextStyle(
-                                  color: Color.fromARGB(255, 219, 219, 219),
-                                  fontSize: 16,
-                                  overflow: TextOverflow.ellipsis)),
-                          InkWell(
-                            onTap: () => Navigator.pushNamed(
-                                context, RoutesClassName.loginPage),
-                            child: const AutoSizeText("Login",
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            const AutoSizeText("Already Have An Account",
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold,
+                                    color: Color.fromARGB(255, 219, 219, 219),
+                                    fontSize: 16,
                                     overflow: TextOverflow.ellipsis)),
-                          )
-                        ],
-                      )
-                    ],
+                            InkWell(
+                              onTap: () => Navigator.pushReplacementNamed(
+                                  context, RoutesClassName.loginPage),
+                              child: const AutoSizeText("Login",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      overflow: TextOverflow.ellipsis)),
+                            )
+                          ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           )
         ],
       ),
@@ -427,7 +420,8 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   ///* aur hm log ays sa hmy ak getDownloadURL ml raha ha jsy hm ak variable ma store krwa ka
   ///* hm firebaseFireStore ma apni images save krwa raha ha .
   Future storeUserGalleryImageFirebaseStorage() async {
-    Reference ref = storage.ref("UserInfoImage/.jpg");
+    var postImages = DateTime.now().microsecondsSinceEpoch.toString();
+    Reference ref = storage.ref("${postImages}UserInfoImage/.jpg");
     await ref.putFile(image!.absolute);
     getDownloadURL = await ref.getDownloadURL();
     debugPrint(

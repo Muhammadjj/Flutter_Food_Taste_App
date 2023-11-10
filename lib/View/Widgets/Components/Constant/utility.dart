@@ -39,6 +39,8 @@ const String backgroundImage1 = "asset/images/background1.png";
 const String connectivity = "asset/images/connectivity.png";
 const String back =
     "https://firebasestorage.googleapis.com/v0/b/food-taste-app-5a86f.appspot.com/o/UserInfoImage%2F.jpg?alt=media&token=b9e397cc-21da-4a4d-895a-f8a5c76842b3";
+const String networkImages =
+    "https://plus.unsplash.com/premium_photo-1664361480105-33afc4559c40?q=80&w=1523&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
 /// ! Button Text Size and Google Fonts .
 Widget buttonTextSizeAndFont({required String text}) {

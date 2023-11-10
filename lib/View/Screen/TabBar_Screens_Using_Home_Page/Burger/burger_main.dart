@@ -40,7 +40,6 @@ class _BurgerTabBarState extends ConsumerState<BurgerTabBar> {
 
   @override
   Widget build(BuildContext context) {
-    var selectProvider = ref.watch(favoriteSelectORNot);
     return Scaffold(
         backgroundColor: allScreenColor,
         body: StreamBuilder(
@@ -80,23 +79,12 @@ class _BurgerTabBarState extends ConsumerState<BurgerTabBar> {
                       ProductHomePageModelClass.fromJson(
                           snapshot.data.docs[index].data());
                   return CustomProductHomePage(
+                    // Hero Tag .
+                    productImageHeroTag: product.imageUrl.toString(),
+                    // Firebase Data.
                     image: product.imageUrl.toString(),
                     name: product.name.toString(),
                     price: product.price,
-                    favoriteIcon: selectProvider
-                        ? const Icon(Icons.favorite_border)
-                        : const Icon(Icons.favorite),
-                    favoriteOnPress: () {
-                      if (selectProvider == false) {
-                        ref.read(favoriteSelectORNot.notifier).update((state) {
-                          return selectProvider = true;
-                        });
-                      } else {
-                        ref.read(favoriteSelectORNot.notifier).update((state) {
-                          return selectProvider = false;
-                        });
-                      }
-                    },
                     onTap: () {
                       // Here this data transfer to next Screen .
                       Navigator.pushNamed(

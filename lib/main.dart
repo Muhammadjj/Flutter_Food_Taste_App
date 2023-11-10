@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
               seedColor: const Color.fromARGB(255, 255, 71, 76)),
           useMaterial3: true,
         ),
-        initialRoute: RoutesClassName.connectivityPage,
+        initialRoute: RoutesClassName.splashScreen,
         onGenerateRoute: RoutesMethod.onGenerateMethod,
       ),
     );

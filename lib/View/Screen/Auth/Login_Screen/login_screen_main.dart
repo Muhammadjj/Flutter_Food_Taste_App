@@ -251,12 +251,29 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                         indent: width * 0.1,
                       ),
 
-                      TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, RoutesClassName.signUpPage);
-                          },
-                          child: const Text("Back"))
+                      SizedBox(
+                        height: height * 0.02,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          const AutoSizeText("Create Account",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 219, 219, 219),
+                                  fontSize: 16,
+                                  overflow: TextOverflow.ellipsis)),
+                          InkWell(
+                            onTap: () => Navigator.pushReplacementNamed(
+                                context, RoutesClassName.signUpPage),
+                            child: const AutoSizeText("Sign Up",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis)),
+                          )
+                        ],
+                      )
                     ],
                   ),
                 ),
@@ -277,7 +294,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       setState(() {
         loading = !loading;
       });
-      Navigator.pushNamed(
+      Navigator.pushReplacementNamed(
         context,
         RoutesClassName.navigationScreen,
       );

@@ -2,6 +2,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:food_taste_app/View/Screen/Favorite/favorite_main.dart';
+import 'package:food_taste_app/View/Screen/NavigationBar_Home_Page/Home_Screen/Side_Bar/side_bar_main.dart';
+import 'package:food_taste_app/View/Screen/Order_Now_Final_Page/order_now_page.dart';
 import 'package:food_taste_app/View/Screen/TabBar_Screens_Using_Home_Page/Burger/burger_main.dart';
 import 'package:food_taste_app/View/Screen/TabBar_Screens_Using_Home_Page/Cake/cake_main.dart';
 import 'package:food_taste_app/View/Screen/TabBar_Screens_Using_Home_Page/IceCream/ice_cream_main.dart';
@@ -26,17 +29,36 @@ class _HomePageState extends ConsumerState<HomePage> {
       animationDuration: const Duration(milliseconds: 200),
       child: Scaffold(
           backgroundColor: allScreenColor,
-          drawer: const Drawer(),
+          drawer: const SideBarHalfPage(),
           appBar: AppBar(
             backgroundColor: allScreenColor,
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const OrderNowPage(),
+                      ));
+                },
                 icon: const Icon(CupertinoIcons.search, color: Colors.white),
               ),
               const CustomSizedBox(
                 widthRatio: 0.01,
-              )
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const FavoritePage(),
+                      ));
+                },
+                icon: const Icon(CupertinoIcons.search, color: Colors.white),
+              ),
+              const CustomSizedBox(
+                widthRatio: 0.01,
+              ),
             ],
             bottom: AppBar(
               backgroundColor: allScreenColor,

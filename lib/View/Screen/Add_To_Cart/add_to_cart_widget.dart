@@ -2,13 +2,13 @@
 
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 
 import '../../Widgets/Components/Constant/colors.dart';
 import '../../Widgets/Components/Constant/utility.dart';
 import '../../Widgets/custom_size_box.dart';
+import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 // !App Bar Cart Name and Cart items
 class NameAndBackButton extends StatelessWidget {
@@ -59,12 +59,14 @@ class CartShowItem extends StatefulWidget {
       required this.image,
       required this.cartItemName,
       required this.cartItemPrice,
-      required this.deleteIconOnTap});
+      required this.deleteIconOnTap,
+      this.favoriteIconOnPress});
   final Image image;
   final String cartItemName;
   // ignore: prefer_typing_uninitialized_variables
   var cartItemPrice;
   final void Function()? deleteIconOnTap;
+  final void Function()? favoriteIconOnPress;
   @override
   State<CartShowItem> createState() => _CartShowItemState();
 }
@@ -133,10 +135,21 @@ class _CartShowItemState extends State<CartShowItem> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // ! Delete Button Sections .
                   InkWell(
                       onTap: widget.deleteIconOnTap,
                       child: const Icon(
                         CupertinoIcons.bin_xmark_fill,
+                      )),
+                  //! Favorite Button Section .
+                  NeumorphicFloatingActionButton(
+                      onPressed: widget.favoriteIconOnPress,
+                      mini: true,
+                      style: const NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.circle()),
+                      child: const Icon(
+                        Icons.favorite,
+                        color: Colors.red,
                       ))
                 ],
               ),

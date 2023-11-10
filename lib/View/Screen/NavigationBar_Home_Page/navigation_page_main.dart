@@ -49,7 +49,7 @@ class _HomePageState extends ConsumerState<NavigationScreen>
         bottomNavigationBar: NavigationBarTheme(
           data: NavigationBarThemeData(
               backgroundColor: Colors.black,
-              indicatorColor: Colors.pink.shade200,
+              indicatorColor: textColor,
               labelTextStyle: const MaterialStatePropertyAll(
                   TextStyle(color: Colors.white))),
           child: NavigationBar(
@@ -63,28 +63,44 @@ class _HomePageState extends ConsumerState<NavigationScreen>
               labelBehavior:
                   NavigationDestinationLabelBehavior.onlyShowSelected,
               destinations: const [
+                // 1
                 NavigationDestination(
                     icon: Icon(
                       CupertinoIcons.home,
                     ),
-                    selectedIcon: Icon(CupertinoIcons.house_fill),
+                    selectedIcon: Icon(
+                      CupertinoIcons.house_fill,
+                      color: iconColor,
+                    ),
                     label: "Home Page"),
+                // 2
                 NavigationDestination(
                     icon: Icon(
                       Icons.amp_stories_rounded,
                     ),
-                    label: "Popular"),
+                    label: "Popular",
+                    selectedIcon: Icon(
+                      Icons.amp_stories_rounded,
+                      color: iconColor,
+                    )),
+                //  3
                 NavigationDestination(
                     icon: Icon(
                       Icons.search,
                     ),
-                    selectedIcon: Icon(CupertinoIcons.search_circle),
+                    selectedIcon: Icon(
+                      CupertinoIcons.search_circle,
+                      color: iconColor,
+                    ),
                     label: "Search"),
                 NavigationDestination(
                     icon: Icon(
                       CupertinoIcons.person_alt_circle,
                     ),
-                    selectedIcon: Icon(Icons.person_pin),
+                    selectedIcon: Icon(
+                      Icons.person_pin,
+                      color: iconColor,
+                    ),
                     label: "Profile"),
               ]),
         ),

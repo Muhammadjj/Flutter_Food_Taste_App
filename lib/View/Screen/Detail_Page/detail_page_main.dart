@@ -54,12 +54,15 @@ class _DetailPageState extends ConsumerState<DetailPage> {
               CartButtonAndImage(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(15),
-                  child: Image(
-                    image: NetworkImage(
-                      widget.modelClass.imageUrl.toString(),
+                  child: Hero(
+                    tag: widget.modelClass.imageUrl.toString(),
+                    child: Image(
+                      image: NetworkImage(
+                        widget.modelClass.imageUrl.toString(),
+                      ),
+                      fit: BoxFit.fill,
+                      alignment: Alignment.center,
                     ),
-                    fit: BoxFit.fill,
-                    alignment: Alignment.center,
                   ),
                 ),
               ),
@@ -155,7 +158,8 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                     children: [
                       FloatingActionButton.small(
                         onPressed: increment,
-                        backgroundColor: iconColor,
+                        heroTag: "float1",
+                        backgroundColor: Colors.white,
                         child: const Icon(
                           CupertinoIcons.plus_app_fill,
                           color: Color.fromARGB(255, 255, 84, 85),
@@ -166,7 +170,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                       ),
                       // Text
                       AutoSizeText(
-                        "$initialValue",
+                        initialValue.toString(),
                         style: GoogleFonts.aBeeZee(
                             textStyle: const TextStyle(
                           fontSize: 25,
@@ -178,6 +182,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                       const CustomSizedBox(widthRatio: 0.01),
                       FloatingActionButton.small(
                         onPressed: decrement,
+                        heroTag: "float2",
                         backgroundColor: iconColor,
                         child: const Icon(
                           CupertinoIcons.minus_rectangle_fill,
@@ -189,6 +194,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                   ),
                 ],
               ),
+
               const CustomSizedBox(
                 heightRatio: 0.02,
               ),

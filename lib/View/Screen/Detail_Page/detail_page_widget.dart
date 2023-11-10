@@ -4,8 +4,8 @@ import 'package:food_taste_app/View/Widgets/custom_size_box.dart';
 import 'package:neumorphic_ui/neumorphic_ui.dart';
 
 class CartButtonAndImage extends StatelessWidget {
-  const CartButtonAndImage({super.key, required this.child});
-  final Widget child;
+  const CartButtonAndImage({super.key, this.child});
+  final Widget? child;
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.sizeOf(context).height;
@@ -28,18 +28,16 @@ class CartButtonAndImage extends StatelessWidget {
               onPressed: () => Navigator.pop(context),
             ),
             NeumorphicFloatingActionButton(
-              style: const NeumorphicStyle(
-                color: Color.fromARGB(255, 255, 84, 85),
-              ),
-              mini: true,
-              child: const Icon(
-                CupertinoIcons.shopping_cart,
-                size: 30,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, RoutesClassName.addToCartPage);
-              },
-            )
+                style: const NeumorphicStyle(
+                  color: Color.fromARGB(255, 255, 84, 85),
+                ),
+                mini: true,
+                child: const Icon(
+                  CupertinoIcons.shopping_cart,
+                  size: 30,
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, RoutesClassName.addToCartPage))
           ],
         ),
         const CustomSizedBox(

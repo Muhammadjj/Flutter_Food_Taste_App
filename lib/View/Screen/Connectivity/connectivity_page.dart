@@ -2,8 +2,9 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_taste_app/Controller/Routes/routes_method.dart';
-import 'package:food_taste_app/View/Screen/Connectivity_Page/connectivity_widget.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/utility.dart';
+
+import 'connectivity_widget.dart';
 
 class ConnectivityPage extends StatefulWidget {
   const ConnectivityPage({Key? key}) : super(key: key);

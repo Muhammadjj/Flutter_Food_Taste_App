@@ -43,6 +43,9 @@ class _UnknownPageState extends ConsumerState<UnknownPage> {
                 var names = data[index].name.toString();
                 var prices = data[index].price;
                 return CustomProductHomePage(
+                  // Hero Tag .
+                  productImageHeroTag: images,
+                  // Firebase Data .
                   image: images,
                   name: names,
                   price: prices,
