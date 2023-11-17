@@ -1,4 +1,4 @@
-import 'package:food_taste_app/Controller/DataBase/favorite_db_provider_database.dart';
+import 'package:food_taste_app/Waste_Data/DataBase/favorite_db_provider_database.dart';
 import 'package:food_taste_app/Models/favorite_button_model_class.dart';
 import 'package:sqflite/sqflite.dart';
 

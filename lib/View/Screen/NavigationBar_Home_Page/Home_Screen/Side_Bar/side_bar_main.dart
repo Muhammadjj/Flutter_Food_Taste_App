@@ -7,6 +7,7 @@ import 'package:food_taste_app/Controller/Services/firebase_collections.dart';
 import 'package:food_taste_app/Models/user_info_model.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/utility.dart';
 import 'package:food_taste_app/View/Widgets/custom_size_box.dart';
+import 'package:shimmer_effect/shimmer_effect.dart';
 
 import '../../../../Widgets/Components/Constant/colors.dart';
 
@@ -78,9 +79,13 @@ class _SideBarHalfPageState extends ConsumerState<SideBarHalfPage> {
                   radius: allScreen * 0.04,
                   backgroundImage: NetworkImage(userInfoImage ?? networkImages),
                 ),
-                productNameText(
-                    name: "${firstName.toString()} ${lastName.toString()}",
-                    fontSize: 25),
+                ShimmerEffect(
+                  baseColor: Colors.white,
+                  highlightColor: const Color.fromARGB(255, 250, 168, 162),
+                  child: productNameText(
+                      name: "${firstName.toString()} ${lastName.toString()}",
+                      fontSize: 25),
+                ),
                 const CustomSizedBox(heightRatio: 0.01),
               ],
             ),
@@ -107,6 +112,13 @@ class _SideBarHalfPageState extends ConsumerState<SideBarHalfPage> {
             onTap: () =>
                 Navigator.pushNamed(context, RoutesClassName.orderNowPage),
           ),
+
+          listTile(
+            icon: Icons.favorite,
+            text: "Favorite",
+            onTap: () =>
+                Navigator.pushNamed(context, RoutesClassName.favoritePage),
+          ),
           listTile(
               icon: Icons.logout_outlined,
               text: "LogOut",
@@ -125,7 +137,7 @@ class _SideBarHalfPageState extends ConsumerState<SideBarHalfPage> {
 
 Widget listTile({String? text, IconData? icon, GestureTapCallback? onTap}) {
   return Card(
-    color: Color.fromARGB(255, 136, 136, 136),
+    color: const Color.fromARGB(255, 136, 136, 136),
     elevation: 5,
     shadowColor: const Color.fromARGB(255, 206, 206, 206).withOpacity(0.2),
     margin: const EdgeInsets.all(10),
@@ -133,9 +145,14 @@ Widget listTile({String? text, IconData? icon, GestureTapCallback? onTap}) {
     child: InkWell(
       onTap: onTap,
       child: ListTile(
-        title: Text(
-          text.toString(),
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: ShimmerEffect(
+          baseColor: Colors.white,
+          highlightColor: const Color.fromARGB(255, 250, 168, 162),
+          child: Text(
+            text.toString(),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
+          ),
         ),
         leading: Icon(
           icon,

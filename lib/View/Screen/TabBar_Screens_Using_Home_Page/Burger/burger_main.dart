@@ -8,8 +8,6 @@ import 'package:food_taste_app/View/Widgets/custom_grid_view.dart';
 import 'package:food_taste_app/View/Widgets/custom_grid_view_shimmer.dart';
 import 'package:food_taste_app/View/Widgets/custom_product_home_page_design.dart';
 
-import '../../../../Controller/Provider/favorite_selected_button.dart';
-
 class BurgerTabBar extends ConsumerStatefulWidget {
   const BurgerTabBar({super.key});
 

@@ -12,16 +12,13 @@ import 'package:form_validation/form_validation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 
-import '../../../Models/add_to_cart_model.dart';
 import '../../Widgets/Components/Constant/background_image.dart';
 import '../../Widgets/decorated_text_field.dart';
 
 class CheckOutScreen extends ConsumerStatefulWidget {
   const CheckOutScreen({
     super.key,
-    required this.addCartModelClass,
   });
-  final AddCartModelClass addCartModelClass;
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _CheckOutScreenState();
 }
@@ -296,7 +293,7 @@ class _CheckOutScreenState extends ConsumerState<CheckOutScreen> {
                                 .set(orderNowModelClass.toMap())
                                 .then((value) {
                               showMessageToast("Successfully Order Now");
-                              // Press button insert data firestore and clear the TextField .
+                              // * Press button insert data firestore and clear the TextField .
                               customerNameController.clear();
                               phoneController.clear();
                               addressController.clear();

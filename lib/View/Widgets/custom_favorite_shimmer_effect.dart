@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer_effect/shimmer_effect.dart';
 
-class CustomGridViewShimmer extends StatelessWidget {
-  const CustomGridViewShimmer({super.key});
+class CustomFavoritePageShimmer extends StatelessWidget {
+  const CustomFavoritePageShimmer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: ShimmerEffect(
@@ -15,8 +15,8 @@ class CustomGridViewShimmer extends StatelessWidget {
         baseColor: Colors.black.withOpacity(0.5),
         highlightColor: Colors.grey,
         child: Container(
-            height: height * 0.1,
-            width: width * 0.3,
+            height: height * 0.3,
+            width: width * 0.9,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [

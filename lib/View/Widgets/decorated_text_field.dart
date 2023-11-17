@@ -83,6 +83,7 @@ class BlurTextField extends StatelessWidget {
       required this.controller,
       this.onChanged,
       this.onFieldSubmitted,
+      this.readOnly = false,
       this.style = const TextStyle(color: Colors.white)});
 
   final double? height;
@@ -98,6 +99,7 @@ class BlurTextField extends StatelessWidget {
   final TextEditingController controller;
   final ValueChanged<String>? onChanged;
   final ValueChanged<String>? onFieldSubmitted;
+  final bool readOnly;
   final TextStyle? style;
   @override
   Widget build(BuildContext context) {
@@ -113,6 +115,7 @@ class BlurTextField extends StatelessWidget {
             validator: validator,
             onChanged: onChanged,
             onFieldSubmitted: onFieldSubmitted,
+            readOnly: readOnly,
             decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),

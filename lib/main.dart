@@ -23,11 +23,11 @@ Future<void> main() async {
       statusBarBrightness: Brightness.dark,
       statusBarColor: statusBarColors,
       statusBarIconBrightness: Brightness.light));
-  runApp(const MyApp());
+  runApp(const FoodApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class FoodApp extends StatelessWidget {
+  const FoodApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +37,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           iconTheme: const IconThemeData(color: Colors.white),
+          canvasColor: Colors.black,
           primaryIconTheme: const IconThemeData(color: Colors.white),
           colorScheme: ColorScheme.fromSeed(
               seedColor: const Color.fromARGB(255, 255, 71, 76)),

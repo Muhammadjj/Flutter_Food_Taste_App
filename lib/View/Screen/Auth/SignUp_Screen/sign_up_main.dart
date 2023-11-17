@@ -421,7 +421,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   ///* hm firebaseFireStore ma apni images save krwa raha ha .
   Future storeUserGalleryImageFirebaseStorage() async {
     var postImages = DateTime.now().microsecondsSinceEpoch.toString();
-    Reference ref = storage.ref("${postImages}UserInfoImage/.jpg");
+    Reference ref = storage.ref("UserInfoImage/.jpg$postImages");
     await ref.putFile(image!.absolute);
     getDownloadURL = await ref.getDownloadURL();
     debugPrint(

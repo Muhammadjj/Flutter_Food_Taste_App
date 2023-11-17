@@ -47,11 +47,11 @@ class _HomePageState extends ConsumerState<NavigationScreen>
     return Scaffold(
         backgroundColor: allScreenColor,
         bottomNavigationBar: NavigationBarTheme(
-          data: NavigationBarThemeData(
+          data: const NavigationBarThemeData(
               backgroundColor: Colors.black,
               indicatorColor: textColor,
-              labelTextStyle: const MaterialStatePropertyAll(
-                  TextStyle(color: Colors.white))),
+              labelTextStyle:
+                  MaterialStatePropertyAll(TextStyle(color: Colors.white))),
           child: NavigationBar(
               height: 60,
               elevation: 2,

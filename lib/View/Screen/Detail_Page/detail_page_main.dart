@@ -93,22 +93,27 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ShimmerEffect(
-                              baseColor: Colors.white,
-                              highlightColor:
-                                  const Color.fromARGB(255, 250, 168, 162),
-                              child: productNameText(
-                                  name: widget.modelClass.name.toString(),
-                                  fontSize: 30)),
+                          Expanded(
+                            flex: 3,
+                            child: ShimmerEffect(
+                                baseColor: Colors.white,
+                                highlightColor:
+                                    const Color.fromARGB(255, 250, 168, 162),
+                                child: productNameText(
+                                    name: widget.modelClass.name.toString(),
+                                    fontSize: 30)),
+                          ),
                           // ** Product Current Price .
-                          ShimmerEffect(
-                              baseColor: Colors.white,
-                              highlightColor:
-                                  const Color.fromARGB(255, 250, 168, 162),
-                              child: productPriceText(
-                                  price: widget.modelClass.price!
-                                      .toStringAsFixed(1),
-                                  fontSize: 25))
+                          Expanded(
+                            child: ShimmerEffect(
+                                baseColor: Colors.white,
+                                highlightColor:
+                                    const Color.fromARGB(255, 250, 168, 162),
+                                child: productPriceText(
+                                    price: widget.modelClass.price!
+                                        .toStringAsFixed(1),
+                                    fontSize: 25)),
+                          )
                         ],
                       ),
                       const CustomSizedBox(
@@ -213,6 +218,7 @@ class _DetailPageState extends ConsumerState<DetailPage> {
                 /// hm ny separate sa ak modle class bnye js ma hm apna
                 /// (AddToCard) ka data store krwa raha ha .
                 onTap: () {
+                  // ! Add all data insert addToCart Collection and Show AddToCart Screen .
                   var dataAndTimeCurrentUid =
                       DateTime.now().microsecondsSinceEpoch.toString();
                   AddCartModelClass cartModel = AddCartModelClass();

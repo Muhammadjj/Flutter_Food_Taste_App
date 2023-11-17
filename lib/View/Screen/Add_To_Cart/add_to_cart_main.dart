@@ -3,16 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:food_taste_app/Controller/DataBase/favorite_db_helper_database.dart';
-import 'package:food_taste_app/Controller/Routes/routes_method.dart';
 import 'package:food_taste_app/Models/add_to_cart_model.dart';
-import 'package:food_taste_app/Models/favorite_button_model_class.dart';
 import 'package:food_taste_app/View/Screen/Add_To_Cart/add_to_cart_widget.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/colors.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/utility.dart';
 import 'package:food_taste_app/View/Widgets/shining_button.dart';
 
+import '../../../Controller/Routes/routes_method.dart';
 import '../../../Controller/Services/get_firebase_add_to_cart_method.dart';
+import '../../../Models/favorite_button_model_class.dart';
 
 class AddToCartScreen extends ConsumerStatefulWidget {
   const AddToCartScreen({
@@ -25,8 +24,6 @@ class AddToCartScreen extends ConsumerStatefulWidget {
 }
 
 class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
-  // Favorite Database Classes
-  FavoriteDbHelperClass dbHelperClass = FavoriteDbHelperClass();
   // Firebase Services
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   User? user = FirebaseAuth.instance.currentUser;
@@ -43,22 +40,6 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
         .collection("YourCart")
         .doc(itemId)
         .delete();
-  }
-
-  // Favorite icon button
-  favoriteInsertData() async {
-    try {
-      dbHelperClass.databaseInsert(
-          modelClass: FavoriteIconModelClass(
-        favoriteID: user!.uid,
-        favoriteImageUrl: cartModelClass.cartImageUrl,
-        favoriteName: cartModelClass.cartName,
-        favoritePrice: cartModelClass.cartPrice,
-      ));
-      showCommonSnackBar(context, text: "Successfully favorite");
-    } catch (e) {
-      showCommonSnackBar(context, text: "Error ::::::;;${e.toString()} ");
-    }
   }
 
   @override
@@ -116,7 +97,29 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
                               },
                               // ! Favorite Icon Button .
                               favoriteIconOnPress: () {
-                                favoriteInsertData();
+                                var dataAndTimeCurrentUid = DateTime.now()
+                                    .microsecondsSinceEpoch
+                                    .toString();
+                                FavoriteIconModelClass favoriteModel =
+                                    FavoriteIconModelClass();
+                                favoriteModel.favoriteID =
+                                    "$dataAndTimeCurrentUid${user!.uid}";
+                                favoriteModel.favoriteImageUrl = snapshot
+                                    .data?[index].cartImageUrl
+                                    .toString();
+                                favoriteModel.favoriteName =
+                                    snapshot.data?[index].cartName.toString();
+                                favoriteModel.favoritePrice =
+                                    snapshot.data?[index].cartPrice;
+                                firestore
+                                    .collection("UserInfo")
+                                    .doc(user!.uid)
+                                    .collection("Favorite")
+                                    .doc("$dataAndTimeCurrentUid${user!.uid}")
+                                    .set(favoriteModel.toMap())
+                                    .then((value) {
+                                  showMessageToast("Add To favorite ");
+                                });
                               },
                             );
                           }),
@@ -151,7 +154,7 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
                                 productNameText(name: "470Rs"),
                               ],
                             ),
-                            // Next Working Buttons .
+                            // * Final Process Next Working Buttons .
                             FoodTasteShineButton(
                               color: const Color.fromARGB(255, 255, 71, 76),
                               height: height * 0.08,
@@ -166,14 +169,9 @@ class _AddToCartScreenState extends ConsumerState<AddToCartScreen> {
                               onTap: () {
                                 if (snapshot.data!.isNotEmpty) {
                                   Navigator.pushNamed(
-                                      context, RoutesClassName.checkOutPage,
-                                      arguments: AddCartModelClass(
-                                          cartImageUrl: cartModelClass
-                                              .cartImageUrl
-                                              .toString(),
-                                          cartName: cartModelClass.cartName
-                                              .toString(),
-                                          cartPrice: cartModelClass.cartPrice));
+                                    context,
+                                    RoutesClassName.checkOutPage,
+                                  );
                                 }
                               },
                             )

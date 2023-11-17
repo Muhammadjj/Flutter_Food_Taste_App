@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:food_taste_app/Models/add_to_cart_model.dart';
 import 'package:food_taste_app/Models/product_home_page_model_class.dart';
 import 'package:food_taste_app/Models/user_info_model.dart';
 import 'package:food_taste_app/View/Screen/Add_To_Cart/add_to_cart_main.dart';
@@ -9,6 +8,7 @@ import 'package:food_taste_app/View/Screen/Auth/SignUp_Screen/sign_up_main.dart'
 import 'package:food_taste_app/View/Screen/Auth/Splash_Screen/splash_screen_main.dart';
 import 'package:food_taste_app/View/Screen/Check_Out_Page/check_out_page.dart';
 import 'package:food_taste_app/View/Screen/Detail_Page/detail_page_main.dart';
+import 'package:food_taste_app/View/Screen/Favorite/favorite_main.dart';
 import 'package:food_taste_app/View/Screen/NavigationBar_Home_Page/Profile_Page/Update_User_Info_Page/update_main.dart';
 import 'package:food_taste_app/View/Screen/NavigationBar_Home_Page/navigation_page_main.dart';
 import 'package:food_taste_app/View/Screen/Order_Now_Final_Page/order_now_page.dart';
@@ -26,6 +26,7 @@ class RoutesClassName {
   static const String connectivityPage = "ConnectivityPage";
   static const String checkOutPage = "CheckOutPage";
   static const String orderNowPage = "OrderNowPage";
+  static const String favoritePage = "FavoritePage";
 }
 
 // ! ALL SCREEN HANDLE
@@ -63,10 +64,7 @@ class RoutesMethod {
     }
     // 8
     else if (settings.name == RoutesClassName.checkOutPage) {
-      return PageRoutes(
-          child: CheckOutScreen(
-        addCartModelClass: settings.arguments as AddCartModelClass,
-      ));
+      return PageRoutes(child: const CheckOutScreen());
     }
     // 9
     else if (settings.name == RoutesClassName.orderNowPage) {
@@ -75,6 +73,10 @@ class RoutesMethod {
     // 10
     else if (settings.name == RoutesClassName.splashScreen) {
       return PageRoutes(child: const SplashScreen());
+    }
+    // 11
+    else if (settings.name == RoutesClassName.favoritePage) {
+      return PageRoutes(child: const FavoritePage());
     }
     // Not Found Page .
     else {

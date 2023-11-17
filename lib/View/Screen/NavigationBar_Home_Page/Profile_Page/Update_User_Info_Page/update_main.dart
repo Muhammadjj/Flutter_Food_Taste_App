@@ -193,6 +193,7 @@ class _UpdateScreenState extends ConsumerState<UpdateScreen> {
                         width: width * 0.95,
                         hintText: "Email",
                         controller: emailController,
+                        readOnly: true,
                         prefixIcon: const Icon(
                           Icons.email_outlined,
                           color: iconColor,
