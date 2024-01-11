@@ -31,9 +31,7 @@ class _BurgerTabBarState extends ConsumerState<BurgerTabBar> {
   }
 
   Stream getBurgerFirebase() {
-    return FirebaseAllCollection.burgerCollection
-        // .where("userID",isEqualTo: user!.uid,)
-        .snapshots();
+    return FirebaseAllCollection.burgerCollection.snapshots();
   }
 
   @override

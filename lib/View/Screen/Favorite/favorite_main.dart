@@ -6,8 +6,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:food_taste_app/Controller/Services/get_firebase_favorite_method.dart';
 import 'package:food_taste_app/View/Screen/Favorite/favorite_widget.dart';
 import 'package:food_taste_app/View/Widgets/Components/Constant/colors.dart';
-import 'package:food_taste_app/View/Widgets/Components/Constant/utility.dart';
 import 'package:food_taste_app/View/Widgets/custom_favorite_shimmer_effect.dart';
+
+import '../../Widgets/Components/Constant/utility.dart';
 
 class FavoritePage extends ConsumerStatefulWidget {
   const FavoritePage({super.key});
@@ -24,14 +25,13 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
   User? user = FirebaseAuth.instance.currentUser;
 
   // ! Delete Favorite Item
-  Stream<void> deleteFavoriteItem({required String itemId}) {
+  deleteFavoriteItem({required String itemId}) {
     return firestore
         .collection("UserInfo")
         .doc(user!.uid)
         .collection("Favorite")
         .doc(itemId)
-        .delete()
-        .asStream();
+        .delete();
   }
 
   @override
@@ -74,12 +74,12 @@ class _FavoritePageState extends ConsumerState<FavoritePage> {
                             // ! Delete Items
                             deleteFavorite: () {
                               deleteFavoriteItem(
-                                  itemId: snapshot.data![index].favoriteID
-                                      .toString());
-                              //     .then((value) {
-                              //   showMessageToast("Delete Favorite Item");
-                              // });
-                              // setState(() {});
+                                      itemId: snapshot.data![index].favoriteID
+                                          .toString())
+                                  .then((value) {
+                                showMessageToast("Delete Favorite Item");
+                              });
+                              setState(() {});
                             },
                           );
                         },

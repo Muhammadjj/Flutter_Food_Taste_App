@@ -23,7 +23,7 @@ class FirebaseAllCollection {
   static CollectionReference<Map<String, dynamic>> cakeCollection =
       FirebaseFirestore.instance.collection("Cake");
 
-  // ! Popular Page Collections.
+  // !Popular Page Collections.
   static CollectionReference<Map<String, dynamic>> popularPageCollection =
       FirebaseFirestore.instance.collection("Popular_Page");
 }

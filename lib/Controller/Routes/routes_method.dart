@@ -98,8 +98,8 @@ class PageRoutes extends PageRouteBuilder {
   final Widget child;
   PageRoutes({required this.child})
       : super(
-          transitionDuration: const Duration(milliseconds: 900),
-          reverseTransitionDuration: const Duration(milliseconds: 500),
+          transitionDuration: const Duration(milliseconds: 300),
+          reverseTransitionDuration: const Duration(milliseconds: 300),
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
             animation = CurvedAnimation(
                 parent: animation, curve: Curves.fastEaseInToSlowEaseOut);

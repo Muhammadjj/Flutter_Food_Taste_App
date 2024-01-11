@@ -9,14 +9,14 @@ import '../../../Widgets/custom_grid_view.dart';
 import '../../../Widgets/custom_grid_view_shimmer.dart';
 import '../../../Widgets/custom_product_home_page_design.dart';
 
-class UnknownPage extends ConsumerStatefulWidget {
-  const UnknownPage({super.key});
+class IceCream extends ConsumerStatefulWidget {
+  const IceCream({super.key});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() => _UnknownPageState();
 }
 
-class _UnknownPageState extends ConsumerState<UnknownPage> {
+class _UnknownPageState extends ConsumerState<IceCream> {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   // User? user = FirebaseAuth.instance.currentUser;
 

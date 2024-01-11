@@ -127,7 +127,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                 child: TabBarView(children: [
                   BurgerTabBar(),
                   FriedPage(),
-                  UnknownPage(),
+                  IceCream(),
                   CakePage(),
                 ]),
               )
